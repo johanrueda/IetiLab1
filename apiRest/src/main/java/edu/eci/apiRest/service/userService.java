@@ -1,17 +1,18 @@
 package edu.eci.apiRest.service;
 
 import edu.eci.apiRest.data.User;
+import edu.eci.apiRest.dto.userDto;
 
 import java.util.List;
 
 public interface userService {
-    User create(User user );
+    User create(userDto user );
 
     User findById( String id );
 
     List<User> all();
 
-    boolean deleteById( String id );
+    void deleteById( String id );
 
-    User update( User user, String userId );
+    User update(userDto user, String userId );
 }

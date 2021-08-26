@@ -3,6 +3,7 @@ import edu.eci.apiRest.data.User;
 import edu.eci.apiRest.dto.userDto;
 import edu.eci.apiRest.service.userService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class userController
 {
     private final userService userService;
 
-    public userController( userService userService )
+    public userController( @Autowired userService userService )
     {
         this.userService = userService;
     }
@@ -39,7 +40,7 @@ public class userController
 
 
     @PostMapping
-    public ResponseEntity<User> create( @RequestBody User userDto )
+    public ResponseEntity<User> create( @RequestBody userDto userDto )
     {
         //TODO implement this method using UserService
         User user = userService.create(userDto);
@@ -47,7 +48,7 @@ public class userController
     }
 
     @PutMapping( "/{id}" )
-    public ResponseEntity<User> update( @RequestBody User userDto, @PathVariable String id )
+    public ResponseEntity<User> update( @RequestBody userDto userDto, @PathVariable String id )
     {
         //TODO implement this method using UserService
         User user = userService.update(userDto,id);
@@ -58,7 +59,7 @@ public class userController
     public ResponseEntity<Boolean> delete( @PathVariable String id )
     {
         //TODO implement this method using UserService
-        boolean result = userService.deleteById(id);
-        return new ResponseEntity<>(result,HttpStatus.OK);
+        userService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
